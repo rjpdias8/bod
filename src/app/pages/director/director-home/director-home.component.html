@@ -1,0 +1,50 @@
+<section *ngIf="!showEditForm">
+  <div>
+    <button class="btn btn-dropbox pull-right" routerLink="become-director">
+      Become Director
+    </button>
+  </div>
+
+  <div class="col-sm-12 col-md-6">
+    <div class="card text-left">
+      <div class="card-header">
+        <h4 class="card-title">My Director List</h4>
+        <p>
+          Add nearly any HTML within, even for linked list groups like the one
+          below.
+        </p>
+      </div>
+      <div class="card-content">
+        <div class="card-body">
+          <ul class="list-group">
+            <!-- user active class to highlight -->
+            <!-- <li
+            class="list-group-item list-group-item-action flex-column align-items-start active"
+            *ngFor="let dl of myActiveDirectoLists"
+          > -->
+            <li
+              class="list-group-item list-group-item-action flex-column align-items-start"
+              *ngFor="let dl of myActiveDirectoLists; let directorIndex = index"
+              (click)="goToEditMyActiveDirectors(directorIndex)"
+            >
+              <div class="d-flex w-100 justify-content-between">
+                <h5 class="mb-3">
+                  {{ dl?.areaName || "Name Not provided from backend" }}
+                </h5>
+                <small>3 days ago</small>
+              </div>
+              <p class="mb-3">
+                {{ dl?.description }}
+              </p>
+              <!-- <small>Donec id elit non mi porta.</small> -->
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section *ngIf="showEditForm">
+  <app-become-director [editFormData]="editFormData"></app-become-director>
+</section>
