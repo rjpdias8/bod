@@ -70,15 +70,25 @@ export class AuthService {
     else return false;
   }
 
+  //forgot password send reset password link on email
   forgetPassword(email) {
     return this.http.get(
       this.apiurl.baseUrl + this.apiurl.forgetPassword + email
     );
   }
 
+  //reset password from email link
   forgetPassword2(body) {
     return this.http.post(
       this.apiurl.baseUrl + this.apiurl.forgetPassword2,
+      body
+    );
+  }
+
+  //change Password when signed in
+  changePassword(body){
+    return this.http.post(
+      this.apiurl.baseUrl + this.apiurl.changePasswordUrl,
       body
     );
   }

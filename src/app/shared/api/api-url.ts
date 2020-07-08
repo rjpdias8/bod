@@ -7,4 +7,5 @@ export class Api {
   userProfile = "user/profile/";
   areaList = "user/areaList";
   userDirector: string = "user/myDirector";
+  changePasswordUrl = "user/passwordUpdate/";
 }

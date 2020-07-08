@@ -3,6 +3,7 @@ import { NgModule } from "@angular/core";
 import { Routes, RouterModule } from "@angular/router";
 
 import { FullLayoutPageComponent } from "app/pages/full-layout-page/full-layout-page.component";
+import { ChangePasswordComponent } from './change-password/change-password.component';
 
 const routes: Routes = [
   {
@@ -15,6 +16,10 @@ const routes: Routes = [
   {
     path: "profile",
     component: UserProfilePageComponent
+  },
+  {
+    path: "change-password",
+    component: ChangePasswordComponent
   }
 ];
 

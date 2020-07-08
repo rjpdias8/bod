@@ -17,25 +17,30 @@
       <div class="card-content">
         <div class="card-body">
           <ul class="list-group">
-            <!-- user active class to highlight -->
-            <!-- <li
-            class="list-group-item list-group-item-action flex-column align-items-start active"
-            *ngFor="let dl of myActiveDirectoLists"
-          > -->
+            <!-- (click)="goToEditMyActiveDirectors(directorIndex)" -->
             <li
               class="list-group-item list-group-item-action flex-column align-items-start"
               *ngFor="let dl of myActiveDirectoLists; let directorIndex = index"
-              (click)="goToEditMyActiveDirectors(directorIndex)"
+              
             >
-              <div class="d-flex w-100 justify-content-between">
+              <div class="d-flex w-100 justify-content-between"
+              (click)="goToEditDirector(dl.id)">
                 <h5 class="mb-3">
-                  {{ dl?.areaName || "Name Not provided from backend" }}
+                  {{ dl?.area_name || "Name Not provided from backend" }}
                 </h5>
                 <small>3 days ago</small>
               </div>
-              <p class="mb-3">
+              <p class="mb-3" (click)="goToEditDirector(dl.id)">
                 {{ dl?.description }}
               </p>
+              <a
+                class="dropdown-item py-1"
+                href="javascript:;"
+                (click)="deleteDirector(dl.id)"
+              >
+                <i class="ft-trash-2 mr-2"></i>
+                <span></span>
+              </a>
               <!-- <small>Donec id elit non mi porta.</small> -->
             </li>
           </ul>
@@ -44,7 +49,7 @@
     </div>
   </div>
 </section>
-
+<!-- 
 <section *ngIf="showEditForm">
   <app-become-director [editFormData]="editFormData"></app-become-director>
-</section>
+</section> -->

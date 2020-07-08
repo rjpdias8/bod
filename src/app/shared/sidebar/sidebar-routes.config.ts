@@ -22,6 +22,16 @@ export const ROUTES: RouteInfo[] = [
     submenu: [],
   },
   {
+    path: "/director/send-invitation",
+    title: "Send Invitation",
+    icon: "ft-layout",
+    class: "",
+    badge: "",
+    badgeClass: "",
+    isExternalLink: false,
+    submenu: [],
+  },
+  {
     path: "/content-layout",
     title: "Content Layout",
     icon: "ft-square",

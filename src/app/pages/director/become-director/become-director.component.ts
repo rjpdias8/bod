@@ -11,22 +11,41 @@ import { Router, ActivatedRoute } from "@angular/router";
 })
 export class BecomeDirectorComponent implements OnInit {
   areaList: Object;
+  id: any;
   @Input() editFormData;
   @ViewChild("f", { static: false }) BecomeDirectorForm: NgForm;
 
   constructor(
     public directorSrvc: DirectorService,
     private toastr: ToastMsgService,
-    private router: Router
+    private router: Router,
+    private route: ActivatedRoute
   ) {}
 
   ngOnInit() {
-    // this.editFormData ? this.fillData() : null;
+    
+   // this.editFormData ? this.fillData() : null;
     this.getAreaFields();
+    this.id = this.route.queryParams['_value']['id'];
+    this.directorSrvc.getDirectorById(this.id).subscribe(
+      (res) => {
+        console.log(res);
+        this.BecomeDirectorForm.value.exp = res["exp"];
+        this.BecomeDirectorForm.value.description = res["description"];
+        this.BecomeDirectorForm.value.area = res["area"];
+        console.log(this.BecomeDirectorForm.value);
+      },
+      (err) => {
+        console.log("director", err);
+      }
+    );
   }
   fillData() {
     console.log(this.editFormData);
     this.BecomeDirectorForm.value.exp = this.editFormData.exp;
+    this.BecomeDirectorForm.value.description = this.editFormData.description;
+    this.BecomeDirectorForm.value.area = this.editFormData.areaId;
+
     // console.log()
   }
 
@@ -55,7 +74,7 @@ export class BecomeDirectorComponent implements OnInit {
         this.router.navigate(["/director"]);
       },
       (err) => {
-        this.toastr.typeError();
+        this.toastr.typeError(err.error);
         console.log("becomeDirector", err);
       }
     );

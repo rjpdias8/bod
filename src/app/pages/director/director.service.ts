@@ -27,5 +27,15 @@ export class DirectorService {
     return this.http.get(this.apiurl.baseUrl + this.apiurl.userDirector);
   }
 
+  //get director by id
+  getDirectorById(id){
+    return this.http.get(this.apiurl.baseUrl + this.apiurl.userDirector+ '/'+ id);
+  }
+  
+  //delete director by id
+  deleteDirector(id){
+    return this.http.delete(this.apiurl.baseUrl + this.apiurl.userDirector+ '/'+ id);
+  }
+
   constructor(private http: HttpClient, private apiurl: Api) {}
 }

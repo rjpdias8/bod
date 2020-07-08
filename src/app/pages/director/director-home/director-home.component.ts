@@ -30,7 +30,7 @@ export class DirectorHomeComponent implements OnInit {
       (err) => {
         console.log("myActiveDirectoLists", err);
         this.myActiveDirectoLists = err;
-        this.toastr.typeError();
+        this.toastr.typeError(err.error);
       }
     );
   }
@@ -41,7 +41,25 @@ export class DirectorHomeComponent implements OnInit {
       description: this.myActiveDirectoLists[directorIndex].description,
       exp: this.myActiveDirectoLists[directorIndex].exp,
     };
+    console.log(this.editFormData);
     this.showEditForm = true;
     // this.router.navigate(["/director/become-director"]);
+  }
+
+  goToEditDirector(id){
+    this.router.navigate(['/director/become-director'],{ queryParams: { id:id}})
+  }
+
+  deleteDirector(id){
+    this.directorSrvc.deleteDirector(id).subscribe(
+      (res) => {
+        this.toastr.typeSuccess();
+        this.getMyActiveDirectoLists();
+      },
+      (err) => {
+        console.log("myActiveDirectoLists", err);
+        this.toastr.typeError(err.error);
+      }
+    );
   }
 }

@@ -17,6 +17,7 @@ import { RegisterPageComponent } from "./register/register-page.component";
     LoginPageComponent,
     RegisterPageComponent,
     ForgotPasswordPageComponent,
+    
   ],
   providers: [],
 })
