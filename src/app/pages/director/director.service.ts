@@ -37,5 +37,46 @@ export class DirectorService {
     return this.http.delete(this.apiurl.baseUrl + this.apiurl.userDirector+ '/'+ id);
   }
 
+  //send invitation
+  sendInvitation(body: any) {
+    return this.http.post(this.apiurl.baseUrl + this.apiurl.sendInvitationUrl, body);
+  }
+
+  // get sent invitations
+  getSentInvitation() {
+    return this.http.get(this.apiurl.baseUrl + this.apiurl.sendInvitationUrl);
+  }
+
+  //receive invitation
+  receiveInvitation(){
+    return this.http.get(this.apiurl.baseUrl + this.apiurl.receiveInvitationUrl);
+  }
+
+  //send email invitation
+  sendEmailInvitation(body: any) {
+    return this.http.post(this.apiurl.baseUrl + this.apiurl.sendEmailInvitationUrl, body);
+  }
+
+  //search director by area
+  searchDirectorByArea(areaId) {
+    return this.http.get(this.apiurl.baseUrl + this.apiurl.searchDirectorUrl+'/' +areaId);
+  }
+
+  //invitation desicion
+  invitationDescison(body: any) {
+    return this.http.post(this.apiurl.baseUrl + this.apiurl.invitationDescionUrl, body);
+  }
+
+  //get my board members
+  getMyoardMembers() {
+    return this.http.get(this.apiurl.baseUrl + this.apiurl.myBoardMembersUrl);
+  }
+
+   //get list of serving board member
+   getServingBoardMember() {
+    return this.http.get(this.apiurl.baseUrl + this.apiurl.iamBoardMemeberUrl);
+  }
+
+
   constructor(private http: HttpClient, private apiurl: Api) {}
 }

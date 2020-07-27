@@ -6,9 +6,16 @@ import { ToastrService } from "ngx-toastr";
 })
 export class ToastMsgService {
   constructor(public toastr: ToastrService) {}
+
+  
   // // Success Type
-  typeSuccess() {
-    this.toastr.success("You are awesome!", "Success!");
+  typeSuccess(msg?) {
+    if(msg!=undefined){
+      this.toastr.success(msg, "Success!");
+    }else{
+      this.toastr.success("You are awesome!", "Success!");
+    }
+   
   }
   // // Success Type
   // typeInfo() {

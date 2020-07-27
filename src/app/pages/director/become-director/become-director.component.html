@@ -9,7 +9,7 @@
   <div class="row text-left match-height">
     <div class="col-md-12">
       <div class="card">
-        <div class="card-header pb-2">
+      <!--  <div class="card-header pb-2">
           <h4 class="card-title" id="basic-layout-form-center">
             Director Registration
           </h4>
@@ -20,13 +20,35 @@
             classes according to his requirements. This example also uses form
             action buttons in the center bottom position of the card.
           </p>
-        </div>
+        </div>-->
         <div class="card-content">
           <div class="px-3">
             <form class="form" (ngSubmit)="onSubmit()" #f="ngForm">
               <div class="row justify-content-md-center">
                 <div class="col-md-6">
                   <div class="form-body">
+
+                     <div class="form-group">
+                      <label for="issueinput5">Area</label>
+                      <select
+                        id="issueinput5"
+                        name="priority"
+                        class="form-control"
+                        data-toggle="tooltip"
+                        data-trigger="hover"
+                        data-placement="top"
+                        data-title="Priority"
+                        name="area"
+                        ngModel
+                        #area="ngModel"
+                      >
+                        <option
+                          *ngFor="let area of areaList"
+                          [value]="area.id"
+                          >{{ area.name }}</option
+                        >
+                      </select>
+                    </div>
                     <div class="form-group">
                       <label for="eventInput1">Experience</label>
                       <input
@@ -51,41 +73,21 @@
                       />
                     </div>
 
-                    <div class="form-group">
-                      <label for="issueinput5">Area</label>
-                      <select
-                        id="issueinput5"
-                        name="priority"
-                        class="form-control"
-                        data-toggle="tooltip"
-                        data-trigger="hover"
-                        data-placement="top"
-                        data-title="Priority"
-                        name="area"
-                        ngModel
-                        #area="ngModel"
-                      >
-                        <option
-                          *ngFor="let area of areaList"
-                          [value]="area.id"
-                          >{{ area.name }}</option
-                        >
-                      </select>
-                    </div>
+                 
                   </div>
                 </div>
               </div>
 
               <div class="form-actions center">
-                <button
-                  class="btn btn-raised btn-warning mr-1"
-                  [routerLink]="['/director']"
-                >
-                  <i class="ft-x"></i> Cancel
-                </button>
-                <button class="btn btn-raised btn-primary">
+              <button class="btn btn-raised btn-primary">
                   <i class="fa fa-check-square-o"></i> Save
                 </button>
+                <button
+                  class="btn btn-raised btn-warning mr-1"
+                  [routerLink]="['/director']">
+                  <i class="ft-x"></i> Cancel
+                </button>
+                
               </div>
             </form>
           </div>

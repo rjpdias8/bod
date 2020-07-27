@@ -34,11 +34,11 @@ export class ForgotPasswordPageComponent implements OnInit {
     }else{
     this.auth.forgetPassword(email).subscribe(
       res => {
-        this.toastr.typeSuccess();
+        this.toastr.typeSuccess('Password reset link sent on your email.');
         this.forogtPasswordForm.reset();
       },
       err => {
-        this.toastr.typeError(err.error);
+        this.toastr.typeError('Email not registered!!');
         this.forogtPasswordForm.reset();
       }
     );

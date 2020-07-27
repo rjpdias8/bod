@@ -1,0 +1,54 @@
+<!--
+<div class="row text-left match-height">
+
+<div class="col-12">
+<h2>My Board</h2>
+</div>
+    <div class="col-lg-4 col-md-6 col-12" *ngFor="let data of myBoardMembers">
+        <div class="card p-2">
+          <h4>{{data.board_member_object?.name}}</h4>
+          <h6>{{data.board_member_object?.location}}</h6>
+          <h6>{{data.area_object?.name}}</h6>
+          <p>{{data.board_member_object?.summary}}</p>
+          <button class="btn btn-raised btn-primary" >
+                  <i class="fa fa-check-square-o"></i> Message
+                </button>
+        </div>
+     </div>
+</div>        
+-->
+ <div class="row">
+      <div class="col-12">
+          <h2>My Board</h2>
+      </div>
+
+        <div class="col-12 col-md-6 col-lg-4"
+         *ngFor="let data of myBoardMembers">
+            <div class="card">
+                <div class="card-header text-center">
+                    <img src="./assets/img/portrait/small/avatar-s-3.png" 
+                    alt="Brek" width="75" class="rounded-circle gradient-mint">
+                </div>
+                <div class="card-content">
+                    <div class="card-body text-center">
+                        <h4 class="card-title">{{data.board_member_object?.name}}</h4>
+                        <p class="category text-gray font-small-4">{{data.area_object?.name}}</p>
+                        <a class="btn btn-lg btn-outline-grey font-small-2 p-2">Message</a>
+                        <hr class="grey">
+                        <div class="row grey">
+                           <!-- <div class="col-4">
+                                <a><i class="ft-star mr-1"></i> <span>4.9</span></a>
+                            </div>-->
+                            <div class="col-6">
+                                <a><i class="ft-globe mr-1"></i> <span>{{data.board_member_object?.location}}</span></a>
+                            </div>
+                            <div class="col-6">
+                                <a><i class="ft-book mr-1"></i> <span>{{data.board_member_object?.experience}} Years</span></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+ </div>       
+

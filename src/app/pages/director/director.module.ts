@@ -6,9 +6,12 @@ import { DirectorRoutingModule } from "./director-routing.module";
 import { DirectorHomeComponent } from "./director-home/director-home.component";
 import { BecomeDirectorComponent } from "./become-director/become-director.component";
 import { SendInvitationComponent } from './send-invitation/send-invitation.component';
+import { InvitationsComponent } from './invitations/invitations.component';
+import { MyBoardComponent } from './my-board/my-board.component';
+import { ServingBoardComponent } from './serving-board/serving-board.component';
 
 @NgModule({
-  declarations: [DirectorHomeComponent, BecomeDirectorComponent, SendInvitationComponent],
+  declarations: [DirectorHomeComponent, BecomeDirectorComponent, SendInvitationComponent, InvitationsComponent, MyBoardComponent, ServingBoardComponent],
   imports: [CommonModule, DirectorRoutingModule, FormsModule],
 })
 export class DirectorModule {}

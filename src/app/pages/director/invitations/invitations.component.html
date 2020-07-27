@@ -1,0 +1,73 @@
+<ul class="nav nav-pills">
+  <li class="nav-item">
+    <a class="nav-link" 
+    [ngClass]="{'active': selected === 'Received'}"
+    (click)="selected='Received'">Received Invitations</a>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link" 
+     [ngClass]="{'active': selected === 'Sent'}"
+    (click)="selected='Sent'">Sent Invitations</a>
+  </li>
+
+</ul>
+
+<div class="row text-left match-height">
+    <div class="col-md-12">
+        <div class="card" *ngIf="selected=='Received'">
+        <h2 class="p-3" *ngIf="receivedInvitations.length==0">
+        No Invitations Received
+        </h2>
+         <table class="table table-condensed" *ngIf="receivedInvitations.length>0">
+           <thead>
+           <th>Area</th>
+           <th>User Name</th>
+           <th>Email</th>
+           <th>Status</th>
+            <th></th>
+            <th></th>
+           </thead>
+           <tbody>
+           <tr *ngFor="let data of receivedInvitations">
+           <td>{{data.area_object?.name}}</td>
+           <td>{{data.invitor_object?.name}}</td>
+           <td>{{data.invitor_object?.email}}</td>
+           <td>{{data.status}}</td>
+            <td>
+             <button class="btn btn-raised btn-primary" *ngIf="data.status=='active'"
+             (click)="invitationDescision(data.id, 'accept');">
+                  <i class="fa fa-check-square-o"></i> Aceept
+                </button>
+            </td>
+            <td>
+             <button class="btn btn-raised btn-danger" *ngIf="data.status=='active'"
+             (click)="invitationDescision(data.id, 'reject');">
+                  <i class="fa fa-check-square-o"></i> Reject
+                </button>
+            </td>
+           </tr>
+           </tbody>
+           </table>
+         </div>
+
+         <div class="card" *ngIf="selected=='Sent'">
+          <h2 class="p-3" *ngIf="sentInvitations.length==0">
+            No Invitations Sent.
+        </h2>
+         <table class="table table-condensed" *ngIf="sentInvitations.length>0">
+           <thead>
+           <th>Area</th>
+           <th>Email</th>
+           <th>Status</th>
+           </thead>
+           <tbody>
+           <tr *ngFor="let data of sentInvitations">
+           <td>{{data.area_object?.name}}</td>
+            <td>{{data.invited_email}}</td>
+           <td>{{data.status}}</td>
+           </tr>
+           </tbody>
+           </table>
+         </div>
+     </div>
+ </div>       

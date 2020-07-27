@@ -40,14 +40,17 @@ export class UserProfilePageComponent implements OnInit {
   onSubmit(form: FormGroup) {
     console.log(form.value); // true or false
     let body = form.value;
+    body['username']= this.profile['username'];
+    body['name']= this.profile['name'];
     this.userService.updateUserProfile(body).subscribe(
       (res) => {
         console.log(res);
         this.getUserProfile();
         this.isEditMode = false;
+        this.toastr.typeSuccess('Profile updated successfully!!')
       },
       (err) => {
-        this.toastr.typeError();
+        this.toastr.typeError(err.error);
 
         this.isEditMode = false;
       }
@@ -62,6 +65,7 @@ export class UserProfilePageComponent implements OnInit {
     this.userService.getUserProfile().subscribe(
       (data) => {
         this.profile = data;
+        console.log(this.profile);
         this.userInfoForm.patchValue(this.profile);
       },
       (err) => console.log(err)

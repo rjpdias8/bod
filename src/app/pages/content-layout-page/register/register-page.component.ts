@@ -22,19 +22,30 @@ export class RegisterPageComponent {
 
   //  On submit click, reset field value
   onSubmit() {
-    console.log(1);
-    // this.registerForm.reset();
-    console.log(this.registerForm);
     let body = this.registerForm.form.value;
+    console.log(body);
+    if(body['name']==''){
+      this.toastr.typeError('Please Enter Name');
+    }else if(body['email']==''){
+      this.toastr.typeError('Please Enter Email');
+    }else if(body['password']==''){
+      this.toastr.typeError('Please Enter Password');
+    }else if(body['confirmPassword']==''){
+      this.toastr.typeError('Please Enter Confirm Password');
+    }else if(body['confirmPassword']!=body['password']){
+      this.toastr.typeError('Both Password should be same');
+    }else{
     this.auth.registerUser(body).subscribe(
       (res) => {
         console.log(res);
+        this.toastr.typeSuccess('Signup Successfully!!');
         this.router.navigate(["login"], { relativeTo: this.route.parent });
       },
       (err) => {
-        this.toastr.typeError();
+        this.toastr.typeError(err.error);
         console.log(err);
       }
     );
+    }
   }
 }

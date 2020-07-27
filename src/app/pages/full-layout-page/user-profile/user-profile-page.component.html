@@ -9,7 +9,9 @@
                     <div class="col-5">
                         <div class="align-self-start halfway-fab pl-3 pt-2">
                             <div class="text-left">
-                                <h3 class="card-title white">Name <i class="fa fa-edit" (click)="isEditMode= !isEditMode"></i></h3>
+                                <h3 class="card-title white">{{profile.name}} 
+                                <i class="fa fa-edit" (click)="isEditMode= !isEditMode"
+                                style="cursor:pointer;"></i></h3>
                             </div>
                         </div>
                     </div>
@@ -48,8 +50,8 @@
                             </ul>
                         </div>
                         <div class="col-lg-2 col-md-2 text-center">
-                            <span class="font-medium-2 text-uppercase">Name</span>
-                            <p class="grey font-small-2">Ninja Developer</p>
+                            <span class="font-medium-2 text-uppercase">{{profile.name}}</span>
+                            <p class="grey font-small-2">{{profile.areas_of_expertise}}</p>
                         </div>
                         <div class="col-lg-5 col-md-5">
                             <ul class="profile-menu no-list-style">
@@ -80,7 +82,11 @@
         <div class="col-sm-12">
             <div class="card">
                 <div class="card-header">
-                    <h5>Personal Information</h5>
+                    <h5>Personal Information
+                    <i class="fa fa-edit" (click)="isEditMode= !isEditMode"
+                                style="cursor:pointer;"></i>
+                    </h5>
+                     
                 </div>
                 <div class="card-content">
                    
@@ -148,7 +154,7 @@
                             </div>
                         </div>
                         <hr>
-                        <div class="mt-3">
+                      <!--  <div class="mt-3">
                             <span class="text-bold-500 primary">Hobbies:</span>
                             <span class="d-block overflow-hidden">I like to ride the cycle to work, swimming, listning music and 
                                 working out. I also like reading magazines, go to museums, watching good movies and eat spicy food while 
@@ -167,9 +173,9 @@
                             <span class="mr-3 mt-2 text-center float-left width-100"> <i class="ft-pie-chart danger font-large-2"></i> <div class="mt-2">Foodie</div></span>
                             <span class="mr-3 mt-2 text-center float-left width-100"> <i class="ft-tv danger font-large-2"></i> <div class="mt-2">TV</div></span>
                             <span class="mr-3 mt-2 text-center float-left width-100"> <i class="icon-basket-loaded danger font-large-2"></i> <div class="mt-2">Shopping</div></span>
-                        </div>
+                        </div>-->
                     </div>
-                    <
+                    
                 
                 </div>
                 
@@ -767,12 +773,14 @@
               </div>
 
               <div class="form-actions right">
-                <button type="button" class="btn btn-raised btn-warning mr-1">
-                  <i class="ft-x"></i> Cancel
-                </button>
-                <button type="submit" class="btn btn-raised btn-primary" >
+               <button type="submit" class="btn btn-raised btn-primary  mr-1" >
                   <i class="fa fa-check-square-o"></i> Save
                 </button>
+                <button type="button" class="btn btn-raised btn-warning"
+                (click)="isEditMode = false">
+                  <i class="ft-x"></i> Cancel
+                </button>
+               
               </div>
             </form>
 

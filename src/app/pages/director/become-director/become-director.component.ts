@@ -69,7 +69,7 @@ export class BecomeDirectorComponent implements OnInit {
     this.directorSrvc.userBecomeDirector(body).subscribe(
       (res) => {
         console.log("becomeDirector", res);
-        this.toastr.typeSuccess();
+        this.toastr.typeSuccess('Director Created Successfully!!!');
 
         this.router.navigate(["/director"]);
       },

@@ -1,23 +1,44 @@
 <section *ngIf="!showEditForm">
   <div>
+    <h4 class="card-title">My Director List</h4>
     <button class="btn btn-dropbox pull-right" routerLink="become-director">
       Become Director
     </button>
   </div>
 
-  <div class="col-sm-12 col-md-6">
+  <div class="col-sm-12 col-md-8 col-lg-8"
+  *ngFor="let dl of myActiveDirectoLists; let directorIndex = index">
     <div class="card text-left">
-      <div class="card-header">
-        <h4 class="card-title">My Director List</h4>
-        <p>
-          Add nearly any HTML within, even for linked list groups like the one
-          below.
-        </p>
-      </div>
+      
       <div class="card-content">
         <div class="card-body">
-          <ul class="list-group">
-            <!-- (click)="goToEditMyActiveDirectors(directorIndex)" -->
+         <div class="d-flex w-100 justify-content-between">
+                <h5 class="mb-3">
+                  {{ dl?.area_object?.name || "Name Not provided from backend" }}
+                </h5>
+                <small>{{dl.exp}} years experience</small>
+              </div>
+              <p class="mb-3" (click)="goToEditDirector(dl.id)">
+                {{ dl?.description }}
+              </p>
+              <a
+                class="dropdown-item py-1"
+                href="javascript:;" title="Edit"
+                (click)="goToEditDirector(dl.id)"
+              >
+                <i class="ft-edit-2 mr-2"></i>
+                <span></span>
+              </a>
+              <a
+                class="dropdown-item py-1"
+                href="javascript:;" title="Delete"
+                (click)="deleteDirector(dl.id)"
+              >
+                <i class="ft-trash-2 mr-2"></i>
+                <span></span>
+              </a>
+         <!--  <ul class="list-group">
+            (click)="goToEditMyActiveDirectors(directorIndex)" 
             <li
               class="list-group-item list-group-item-action flex-column align-items-start"
               *ngFor="let dl of myActiveDirectoLists; let directorIndex = index"
@@ -26,7 +47,7 @@
               <div class="d-flex w-100 justify-content-between"
               (click)="goToEditDirector(dl.id)">
                 <h5 class="mb-3">
-                  {{ dl?.area_name || "Name Not provided from backend" }}
+                  {{ dl?.area_object?.name || "Name Not provided from backend" }}
                 </h5>
                 <small>3 days ago</small>
               </div>
@@ -41,9 +62,8 @@
                 <i class="ft-trash-2 mr-2"></i>
                 <span></span>
               </a>
-              <!-- <small>Donec id elit non mi porta.</small> -->
             </li>
-          </ul>
+          </ul>-->
         </div>
       </div>
     </div>

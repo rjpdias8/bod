@@ -8,4 +8,11 @@ export class Api {
   areaList = "user/areaList";
   userDirector: string = "user/myDirector";
   changePasswordUrl = "user/passwordUpdate/";
+  sendInvitationUrl = "user/mySentInvitations/";
+  receiveInvitationUrl = "user/myReceivedInvitations/";
+  sendEmailInvitationUrl = "user/sendEmailInvitation/";
+  searchDirectorUrl = "user/searchDirector";
+  invitationDescionUrl = "user/invitationDecision";
+  myBoardMembersUrl = "user/myBoardMembers";
+  iamBoardMemeberUrl = "user/myBoards";
 }

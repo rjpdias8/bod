@@ -27,16 +27,22 @@ export class LoginPageComponent {
     // this.toast.success("hello");
     console.log(this.loginForm.value);
     let body = this.loginForm.value;
+    if(body['username']==''){
+      this.toastr.typeError('Please Enter Username');
+    }else if(body['password']==''){
+      this.toastr.typeError('Please Enter Password');
+    }else{
     this.auth.login(body).subscribe(
       (res) => {
         console.log(res);
         this.router.navigate([""]);
       },
       (err) => {
-        this.toastr.typeError();
+        this.toastr.typeError(err.error.non_field_errors[0]);
         console.log(err);
       }
     );
+    }
   }
   // On Forgot password link click
   onForgotPassword() {
