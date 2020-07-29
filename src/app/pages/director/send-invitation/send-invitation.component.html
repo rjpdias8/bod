@@ -20,7 +20,7 @@
                     <div class="form-group">
                       <label for="area">Area</label>
                        <select name="area"  [(ngModel)]="area" 
-                        (change)='getDirectorByArea(area.value)'
+                        (change)='getDirectorByArea()'
                         class="form-control">
                         <option
                           *ngFor="let area of areaList"

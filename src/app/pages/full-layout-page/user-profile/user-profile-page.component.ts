@@ -13,7 +13,7 @@ export class UserProfilePageComponent implements OnInit {
   currentPage: string = "About";
   userInfoForm: FormGroup;
   isEditMode: boolean = false;
-  profile: Object;
+  profile: any;
 
   constructor(
     private userService: UserService,
