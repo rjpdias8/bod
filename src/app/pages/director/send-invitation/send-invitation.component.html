@@ -57,18 +57,74 @@
           </h4>
           </div>
            <div class="card-content pb-2">
-           <table class="table table-condensed">
+            <div class="col-md-12">
+        <h4 *ngIf="filterExpand" (click)="filterExpand=false"
+        style="cursor:pointer;">
+        <i class="fa fa-caret-up" ></i> 
+        Filter</h4>
+        <h4 *ngIf="!filterExpand" (click)="filterExpand=true"
+        style="cursor:pointer;">
+        <i class="fa fa-caret-down" ></i> 
+        Filter</h4>
+        </div>
+        <div class="row p-2" *ngIf="filterExpand" >
+        <div class="col-md-4">
+          <div class="form-group">
+                      <label for="name">Name</label>
+                      <input
+                        type="text"
+                        id="name"
+                        class="form-control"
+                        name="name"
+                        ngModel
+                        placeholder="Search by Name"
+                        #name="ngModel"
+                        (input)="filterInvitation('user_object.name', name, 'text')"/>
+            </div>
+        </div>
+
+         <div class="col-md-4">
+          <div class="form-group">
+                      <label for="location">Location</label>
+                      <input
+                        type="text"
+                        id="location"
+                        class="form-control"
+                        name="location"
+                        ngModel
+                        placeholder="Search by Location"
+                        #location="ngModel"
+                        (input)="filterInvitation('user_object.location', location, 'text')"/>
+            </div>
+        </div>
+       
+        </div>
+           <ngb-pagination style="float:right;margin-right:10px;"
+            [(page)]="page"
+            [pageSize]="pageSize"
+            [collectionSize]="inviteeList.length">
+            
+            </ngb-pagination>
+           <table class="table table-condensed"
+           sortable-table (sorted)="onSorted($event)">
            <thead>
-           <th>User</th>
-           <th>Email</th>
-           <th>Area</th>
-           <th>Experience</th>
-            <th>Location</th>
+           <th sortable-column="user_object.name">User</th>
+           <th sortable-column="user_object.email" >Email</th>
+           <th sortable-column="area_object.name">Area</th>
+           <th sortable-column="exp">Experience</th>
+            <th sortable-column="user_object.location">Location</th>
             <th></th>
            </thead>
            <tbody>
-           <tr *ngFor="let data of inviteeList">
-           <td>{{data.user_object?.name}}</td>
+           <tr *ngFor="let data of inviteeList | slice: (page-1) * pageSize : (page-1) * pageSize + pageSize">
+           <td>
+            <a (click)="viewDetails(data.user_object,longContent)"
+            style="color: blue;">  
+             <img src="./assets/img/user-images/amit.png" 
+                    alt="User Profile" width="40" height="40" 
+                    class="rounded-circle gradient-mint">
+             {{data.user_object?.name}} </a>
+           </td>
             <td>{{data.user_object?.email}}</td>
            <td>{{data.area_object?.name}}</td>
            <td>{{data.exp}}</td>
@@ -89,3 +145,29 @@
   </div>
 </section>
 <!-- // Basic form layout section end -->
+
+
+ <ng-template #longContent let-modal>
+  <div class="modal-header">
+    <h4 class="modal-title">User Details</h4>
+    <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+  <div class="card-header text-center">
+                    <img src="./assets/img/user-images/amit.png" 
+                    alt="Brek" width="75" class="rounded-circle gradient-mint">
+   </div>
+    <h2> {{userDetails.name}}</h2>
+    <h6><i class="ft-map-pin mr-1"></i>  {{userDetails.location}}, {{userDetails.country}}</h6>
+    <h6>{{userDetails.summary}}</h6>
+    <h6>{{userDetails.experience}} years of {{userDetails.areas_of_expertise}} experience</h6>
+     <h6><i class="ft-code mr-1"></i> {{userDetails.technical_skill_area}}</h6>
+    <h6><i class="ft-mail mr-1"></i>  {{userDetails.email}}</h6>
+    <h6><i class="ft-external-link mr-1"></i> {{userDetails.linkedin}}</h6>
+     </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-light" (click)="modal.close('Close click')">Close</button>
+  </div>
+</ng-template>

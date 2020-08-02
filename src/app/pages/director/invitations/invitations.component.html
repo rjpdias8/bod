@@ -18,20 +18,105 @@
         <h2 class="p-3" *ngIf="receivedInvitations.length==0">
         No Invitations Received
         </h2>
-         <table class="table table-condensed" *ngIf="receivedInvitations.length>0">
+        <div class="col-md-12">
+        <h4 *ngIf="filterExpand" (click)="filterExpand=false"
+        style="cursor:pointer;">
+        <i class="fa fa-caret-up" ></i> 
+        Filter</h4>
+        <h4 *ngIf="!filterExpand" (click)="filterExpand=true"
+        style="cursor:pointer;">
+        <i class="fa fa-caret-down" ></i> 
+        Filter</h4>
+        </div>
+         <div class="row p-2" *ngIf="filterExpand">
+        
+        <div class="col-md-4">
+          <div class="form-group">
+                      <label for="name">Name</label>
+                      <input
+                        type="text"
+                        id="name"
+                        class="form-control"
+                        name="name"
+                        ngModel
+                        placeholder="Search by Name"
+                        #name="ngModel"
+                         (input)="filterInvitation('Received','invitor_object.name', name, 'text')"/>
+            </div>
+        </div>
+
+        <div class="col-md-4">
+          <div class="form-group">
+                     <label for="area">Area</label>
+                      <select
+                        id="area"
+                        name="area"
+                        class="form-control"
+                        name="area"
+                        ngModel
+                        #area="ngModel"
+                          (change)="filterInvitation('Received','area_object.name', area)"
+                      >
+                        <option [value]="any" selected>Any</option>
+                        <option
+                          *ngFor="let area of areaList"
+                          [value]="area.name"
+                          >{{ area.name }}</option
+                        >
+                      </select>
+            </div>
+        </div>
+
+         <div class="col-md-4">
+          <div class="form-group">
+                     <label for="status">Status</label>
+                      <select
+                        id="status"
+                        name="status"
+                        class="form-control"
+                        name="status"
+                        ngModel
+                        #status="ngModel"
+                         (change)="filterInvitation('Received','status', status)"
+                      >
+                        <option
+                          *ngFor="let status of statusList"
+                          [value]="status"
+                          >{{ status}}</option
+                        >
+                      </select>
+            </div>
+        </div>
+        </div>
+        <div class="col-md-12">
+           <ngb-pagination style="float:right;margin:10px;"
+            [(page)]="page"
+            [pageSize]="pageSize"
+            [collectionSize]="receivedInvitations.length">
+             </ngb-pagination>
+         </div>
+         <table class="table table-condensed" *ngIf="receivedInvitations.length>0"
+          sortable-table (sorted)="onSortedReceivedInvitation($event)">
            <thead>
-           <th>Area</th>
-           <th>User Name</th>
-           <th>Email</th>
-           <th>Status</th>
+           <th sortable-column="invitor_object.name">Name</th>
+           <th sortable-column="invitor_object.email">Email</th>
+           <th sortable-column="area_object.name">Area</th>
+           <th sortable-column="status">Status</th>
             <th></th>
             <th></th>
            </thead>
            <tbody>
-           <tr *ngFor="let data of receivedInvitations">
-           <td>{{data.area_object?.name}}</td>
-           <td>{{data.invitor_object?.name}}</td>
+           <tr *ngFor="let data of receivedInvitations | slice: (page-1) * pageSize : (page-1) * pageSize + pageSize">
+           <td >
+            <a (click)="viewDetails(data.invitor_object,longContent)"
+            style="color: blue;">  
+             <img src="./assets/img/user-images/amit.png" 
+                    alt="User Profile" width="40" height="40" 
+                    class="rounded-circle gradient-mint">
+             {{data.invitor_object?.name}} </a>
+           </td>
            <td>{{data.invitor_object?.email}}</td>
+           <td>{{data.area_object?.name}}</td>
            <td>{{data.status}}</td>
             <td>
              <button class="btn btn-raised btn-primary" *ngIf="data.status=='active'"
@@ -54,16 +139,102 @@
           <h2 class="p-3" *ngIf="sentInvitations.length==0">
             No Invitations Sent.
         </h2>
-         <table class="table table-condensed" *ngIf="sentInvitations.length>0">
+         <div class="col-md-12">
+        <h4 *ngIf="filterExpand" (click)="filterExpand=false"
+        style="cursor:pointer;">
+        <i class="fa fa-caret-up" ></i> 
+        Filter</h4>
+        <h4 *ngIf="!filterExpand" (click)="filterExpand=true"
+        style="cursor:pointer;">
+        <i class="fa fa-caret-down" ></i> 
+        Filter</h4>
+        </div>
+        <div class="row p-2" *ngIf="filterExpand" >
+        <div class="col-md-4">
+          <div class="form-group">
+                      <label for="name">Name</label>
+                      <input
+                        type="text"
+                        id="name"
+                        class="form-control"
+                        name="name"
+                        ngModel
+                        placeholder="Search by Name"
+                        #name="ngModel"
+                         (input)="filterInvitation('Sent','invited_object.name', name, 'text')"/>
+            </div>
+        </div>
+
+        <div class="col-md-4">
+          <div class="form-group">
+                     <label for="area">Area</label>
+                      <select
+                        id="area"
+                        name="area"
+                        class="form-control"
+                        name="area"
+                        ngModel
+                        #area="ngModel"
+                        (change)="filterInvitation('Sent','area', area)"
+                      >
+                        <option [value]="any" selected>Any</option>
+                        <option
+                          *ngFor="let area of areaList"
+                          [value]="area.id"
+                          >{{ area.name }}</option
+                        >
+                      </select>
+            </div>
+        </div>
+
+         <div class="col-md-4">
+          <div class="form-group">
+                     <label for="status">Status</label>
+                      <select
+                        id="status"
+                        name="status"
+                        class="form-control"
+                        name="status"
+                        ngModel
+                        #status="ngModel"
+                         (change)="filterInvitation('Sent','status', status)"
+                      >
+                        <option
+                          *ngFor="let status of statusList"
+                          [value]="status"
+                          >{{ status}}</option
+                        >
+                      </select>
+            </div>
+        </div>
+        </div>
+         <div class="col-md-12">
+           <ngb-pagination style="float:right;margin:10px;"
+            [(page)]="page"
+            [pageSize]="pageSize"
+            [collectionSize]="sentInvitations.length">
+             </ngb-pagination>
+         </div>
+         <table class="table table-condensed" *ngIf="sentInvitations.length>0"
+          (sorted)="onSortedSentInvitation($event)">
            <thead>
-           <th>Area</th>
-           <th>Email</th>
-           <th>Status</th>
+           <th sortable-column="invited_object.name"> Name</th>
+           <th sortable-column="invited_object.email">Email</th>
+           <th sortable-column="area_object.name">Area</th>
+           <th sortable-column="status">Status</th>
            </thead>
            <tbody>
-           <tr *ngFor="let data of sentInvitations">
-           <td>{{data.area_object?.name}}</td>
-            <td>{{data.invited_email}}</td>
+           <tr *ngFor="let data of sentInvitations | slice: (page-1) * pageSize : (page-1) * pageSize + pageSize">
+           <td>
+             <a (click)="viewDetails(data.invited_object,longContent)"
+             style="color: blue;">  
+               <img src="./assets/img/user-images/amit.png" 
+                    alt="User Profile" width="40" height="40" 
+                    class="rounded-circle gradient-mint">
+             {{data.invited_object?.name}} </a>
+           </td>
+             <td>{{data.invited_object?.email}}</td>
+            <td>{{data.area_object?.name}}</td>
            <td>{{data.status}}</td>
            </tr>
            </tbody>
@@ -71,3 +242,33 @@
          </div>
      </div>
  </div>       
+
+<!--
+<button class="btn btn-outline-primary mb-2 mr-2" (click)="openScrollableContent(longContent)">
+Modal scrollable content</button>
+-->
+
+ <ng-template #longContent let-modal>
+  <div class="modal-header">
+    <h4 class="modal-title">User Details</h4>
+    <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+  <div class="card-header text-center">
+                    <img src="./assets/img/user-images/amit.png" 
+                    alt="Brek" width="75" class="rounded-circle gradient-mint">
+   </div>
+    <h2> {{userDetails.name}}</h2>
+    <h6><i class="ft-map-pin mr-1"></i>  {{userDetails.location}}, {{userDetails.country}}</h6>
+    <h6>{{userDetails.summary}}</h6>
+    <h6>{{userDetails.experience}} years of {{userDetails.areas_of_expertise}} experience</h6>
+     <h6><i class="ft-code mr-1"></i> {{userDetails.technical_skill_area}}</h6>
+    <h6><i class="ft-mail mr-1"></i>  {{userDetails.email}}</h6>
+    <h6><i class="ft-external-link mr-1"></i> {{userDetails.linkedin}}</h6>
+     </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-light" (click)="modal.close('Close click')">Close</button>
+  </div>
+</ng-template>

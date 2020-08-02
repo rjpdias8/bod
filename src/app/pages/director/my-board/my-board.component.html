@@ -33,6 +33,8 @@
                     <div class="card-body text-center">
                         <h4 class="card-title">{{data.board_member_object?.name}}</h4>
                         <p class="category text-gray font-small-4">{{data.area_object?.name}}</p>
+                         <a class="btn btn-lg btn-outline-primary font-small-2 p-2 mr-1"
+                         (click)="viewDetails(data.board_member_object,longContent)">View</a>
                         <a class="btn btn-lg btn-outline-grey font-small-2 p-2">Message</a>
                         <hr class="grey">
                         <div class="row grey">
@@ -52,3 +54,27 @@
         </div>
  </div>       
 
+<ng-template #longContent let-modal>
+  <div class="modal-header">
+    <h4 class="modal-title">User Details</h4>
+    <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+  <div class="card-header text-center">
+                    <img src="./assets/img/user-images/amit.png" 
+                    alt="Brek" width="75" class="rounded-circle gradient-mint">
+   </div>
+    <h2> {{userDetails.name}}</h2>
+    <h6><i class="ft-map-pin mr-1"></i>  {{userDetails.location}}, {{userDetails.country}}</h6>
+    <h6>{{userDetails.summary}}</h6>
+    <h6>{{userDetails.experience}} years of {{userDetails.areas_of_expertise}} experience</h6>
+     <h6><i class="ft-code mr-1"></i> {{userDetails.technical_skill_area}}</h6>
+    <h6><i class="ft-mail mr-1"></i>  {{userDetails.email}}</h6>
+    <h6><i class="ft-external-link mr-1"></i> {{userDetails.linkedin}}</h6>
+     </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-light" (click)="modal.close('Close click')">Close</button>
+  </div>
+</ng-template>

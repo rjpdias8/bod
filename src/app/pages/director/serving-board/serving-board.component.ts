@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { DirectorService } from "./../director.service";
 import { ToastMsgService } from "app/toastMsg.service";
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 @Component({
   selector: 'app-serving-board',
   templateUrl: './serving-board.component.html',
@@ -9,7 +10,8 @@ import { ToastMsgService } from "app/toastMsg.service";
 export class ServingBoardComponent implements OnInit {
 
   constructor(public directorSrvc: DirectorService,
-    private toastr: ToastMsgService) { }
+    private toastr: ToastMsgService,
+    private modalService: NgbModal) { }
 
     servingBoardMembers: any = [];
 
@@ -27,6 +29,13 @@ export class ServingBoardComponent implements OnInit {
           console.log("servingBoardMembers", err);
         }
       )
+
+}
+
+userDetails: any;
+viewDetails(data, content){
+  this.userDetails = data;
+  this.modalService.open(content);
 
 }
 }
