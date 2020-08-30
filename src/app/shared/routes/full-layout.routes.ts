@@ -21,4 +21,11 @@ export const Full_ROUTES: Routes = [
         (m) => m.DirectorModule
       ),
   },
+  {
+    path: "message",
+    loadChildren: () =>
+      import("../../pages/chat/chat.module").then(
+        (m) => m.ChatModule
+      ),
+  },
 ];

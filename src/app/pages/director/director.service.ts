@@ -6,6 +6,9 @@ import { Api } from "app/shared/api/api-url";
   providedIn: "root",
 })
 export class DirectorService {
+
+  constructor(private http: HttpClient, private apiurl: Api) {}
+
   /* 
   get the areas where user can become director
   */
@@ -78,5 +81,4 @@ export class DirectorService {
   }
 
 
-  constructor(private http: HttpClient, private apiurl: Api) {}
 }

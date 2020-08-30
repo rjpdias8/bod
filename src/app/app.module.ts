@@ -25,6 +25,7 @@ import { AuthService } from "./shared/auth/auth.service";
 import { AuthGuard } from "./shared/auth/auth-guard.service";
 import { TokenInterceptorService } from "./shared/services/token-interceptor.service";
 import { ToastrModule } from "ngx-toastr";
+import {ChatModule} from './pages/chat/chat.module';
 
 const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
   suppressScrollX: true,
@@ -52,6 +53,7 @@ export function createTranslateLoader(http: HttpClient) {
     }),
     PerfectScrollbarModule,
     ToastrModule.forRoot(),
+    ChatModule
   ],
   providers: [
     AuthService,
