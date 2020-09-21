@@ -11,6 +11,14 @@ const routes: Routes = [
             title: 'Chat'
         },
 
+    },
+    {
+        path: 'user/:userId',
+        component: ChatComponent,
+        data: {
+            title: 'Chat'
+        },
+
     }
 ];
 

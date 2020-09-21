@@ -1,4 +1,5 @@
 <div class="chat-application">
+ 
   <div #contentOverlay class="content-overlay" (click)="onContentOverlay()"></div>
   <div [perfectScrollbar] #chatSidebar class="chat-sidebar float-left d-none d-sm-none d-md-block d-lg-block">
     <div class="chat-sidebar-content">
@@ -14,7 +15,7 @@
       </div>
       <div id="users-list" class="list-group position-relative">
         <div class="users-list-padding">
-          <a class="list-group-item bg-blue-grey bg-lighten-5 border-right-primary border-right-2" (click)="SetActive($event, 'chat1')">
+          <!-- <a class="list-group-item bg-blue-grey bg-lighten-5 border-right-primary border-right-2" (click)="SetActive($event, 'chat1')">
             <span class="media">
               <span class="avatar avatar-md avatar-online">
                 <img class="media-object d-flex mr-3 bg-primary height-50 rounded-circle" src="assets/img/portrait/small/avatar-s-3.png"
@@ -54,7 +55,30 @@
                 </p>
               </div>
             </span>
-          </a>
+          </a> -->
+
+          <a class="list-group-item no-border"    *ngFor="let groupData of groupUser;">
+  <span class="media" (click)="SetActive($event,groupData)">
+    <!-- <span class="avatar avatar-md avatar-busy">
+      <img class="media-object d-flex mr-3 bg-primary height-50 rounded-circle"
+       src="assets/img/user-images/amit.png"
+        alt="Generic placeholder image">
+      <i></i>
+    </span> -->
+    <div class="media-body  text-left">
+      <h6 class="list-group-item-heading">{{groupData?.userOrGroupName}}
+         <!-- <span class="font-small-3 float-right primary">{{groupData?.time}}</span>  -->
+      </h6>
+      <p class="list-group-item-text text-muted">
+        <i class="ft-check primary font-small-2"></i> {{groupData?.lastMessage}}
+        <span class="float-right
+              primary">
+          <span class="badge badge-pill badge-primary">{{groupData?.unreadMessage}}</span>
+        </span>
+      </p>
+    </div>
+  </span>
+</a>
        
         </div>
       </div>
@@ -64,7 +88,7 @@
     <div class="media">
       <span class="chat-app-sidebar-toggle ft-align-justify font-large-1 mr-2 d-none d-block d-sm-block d-md-none" (click)="onSidebarToggle()"></span>
       <div class="media-body text-left">
-        <img [src]="[activeChatUserImg]" width="37" class="rounded-circle mr-1" alt="avatar" />
+        <!-- <img [src]="[activeChatUserImg]" width="37" class="rounded-circle mr-1" alt="avatar" /> -->
         <span>{{ activeChatUser }}</span>
         <i class="ft-more-vertical float-right mt-1"></i>
       </div>
@@ -74,15 +98,24 @@
     <div class="badge badge-dark mb-1">Chat History</div>
     <div class="chats">
       <div class="chats">
-        <div [ngClass]="[chat.chatClass]" *ngFor="let chat of chat">
-          <div class="chat-avatar">
-            <a class="avatar" data-toggle="tooltip" data-placement="[chat.avatar]" title="" data-original-title="">
-              <img [src]="[chat.imagePath]" class="width-50" alt="avatar" />
+        <div *ngFor="let chat of messages">
+        <div [ngClass]="(chat?.sender=='left')?'chat chat-left':'chat'" >
+          <div class="chat-avatar"  *ngIf="chat?.senderName!==activeChatUser">
+            <a class="avatar" data-toggle="tooltip" data-placement="[chat.avatar]"
+           
+             title="" data-original-title="">
+             {{chat?.senderName}}
+              <!-- <img [src]="[chat?.imagePath]" class="width-50" alt="avatar" /> -->
             </a>
           </div>
           <div class="chat-body">
-            <div class="chat-content" *ngFor="let message of chat.messages">
-              <p *ngIf="chat.messageType === 'text'">{{ message }}</p>
+            <div class="chat-content">
+              <p *ngIf="chat.type === 'text'">{{ chat?.message }}</p>
+              <span class="time" *ngIf="chat?.time !='' "
+              style="font-size:10px;">
+              {{chat.time | date : 'shortTime'}}
+              <!-- {{chat.time }} -->
+            </span>
               <!-- <vg-player *ngIf="chat.messageType === 'audio'">
                 <audio [vgMedia]="media1" #media1 id="singleAudio" preload="auto" controls>
                   <source [src]="message" type="audio/mp3">
@@ -93,12 +126,13 @@
                   <source [src]="message" type="video/mp4">
                 </video>
               </vg-player> -->
+              
             </div>
           </div>
-          <p class="time" *ngIf="chat.time !='' ">{{chat.time}}</p>
+         
         </div>
-
-        <div class="chat" *ngIf="messages.length > 0">
+      </div>
+        <!-- <div class="chat" *ngIf="messages.length > 0">
           <div class="chat-avatar">
             <a class="avatar" data-toggle="tooltip" data-placement="right" title="" data-original-title="">
               <img src="assets/img/portrait/small/avatar-s-1.png" class="width-50" alt="avatar" />
@@ -106,10 +140,10 @@
           </div>
           <div class="chat-body">
             <div class="chat-content" *ngFor="let message of messages">
-              <p>{{ message }}</p>
+              <p>{{ message.message }}</p>
             </div>
           </div>
-        </div>
+        </div> -->
 
       </div>
     </div>

@@ -35,7 +35,8 @@
                         <p class="category text-gray font-small-4">{{data.area_object?.name}}</p>
                          <a class="btn btn-lg btn-outline-primary font-small-2 p-2 mr-1"
                          (click)="viewDetails(data.board_member_object,longContent)">View</a>
-                        <a class="btn btn-lg btn-outline-grey font-small-2 p-2">Message</a>
+                        <a class="btn btn-lg btn-outline-grey font-small-2 p-2"
+                        routerLink="/message/user/{{data.board_member_object?.id}}">Message</a>
                         <hr class="grey">
                         <div class="row grey">
                            <!-- <div class="col-4">
